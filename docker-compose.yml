@@ -1,0 +1,66 @@
+# 中文注释：本文件(docker-compose.yml)用于实现该模块的核心逻辑、接口或页面渲染，便于定位职责与维护。
+version: "3.9"
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: citeguard
+      POSTGRES_PASSWORD: citeguard
+      POSTGRES_DB: citeguard
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+psycopg2://citeguard:citeguard@postgres:5432/citeguard
+      REDIS_URL: redis://redis:6379/0
+      STORAGE_ROOT: /data/storage
+      ZOTERO_SNAPSHOT_PATH: /data/fixtures/zotero_snapshot.json
+      LLM_PROVIDER: mock
+    volumes:
+      - ./fixtures:/data/fixtures
+      - storage:/data/storage
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+  worker:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    command: ["celery", "-A", "app.worker.celery_app", "worker", "-B", "--loglevel=info"]
+    environment:
+      DATABASE_URL: postgresql+psycopg2://citeguard:citeguard@postgres:5432/citeguard
+      REDIS_URL: redis://redis:6379/0
+      STORAGE_ROOT: /data/storage
+      ZOTERO_SNAPSHOT_PATH: /data/fixtures/zotero_snapshot.json
+      LLM_PROVIDER: mock
+    volumes:
+      - ./fixtures:/data/fixtures
+      - storage:/data/storage
+    depends_on:
+      - postgres
+      - redis
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    environment:
+      VITE_API_BASE: http://localhost:8000
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
+  storage:

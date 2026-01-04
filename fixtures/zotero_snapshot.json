@@ -1,0 +1,18 @@
+[
+  {
+    "id": "ZOTERO1",
+    "title": "Demo Paper Title",
+    "authors": ["Jane Doe", "John Smith"],
+    "year": 2024,
+    "venue": "Journal of Demo Studies",
+    "publication_type": "article",
+    "volume": "1",
+    "number": "2",
+    "pages": "10-20",
+    "publisher": "Demo Publisher",
+    "doi": "10.0000/mock",
+    "url": "https://example.invalid/demo",
+    "abstract": "This is a demo abstract for citation checking.",
+    "identifiers": {"zotero_itemKey": "ZOTERO1"}
+  }
+]
