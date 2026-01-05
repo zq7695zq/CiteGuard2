@@ -1,0 +1,19 @@
+fastapi
+uvicorn[standard]
+celery
+sqlalchemy
+python-multipart
+aiofiles
+python-dotenv
+requests
+pydantic
+pydantic-settings
+SQLAlchemy-Utils
+# Core logic dependencies from original requirements.txt
+openai
+tiktoken
+tqdm
+bibtexparser
+pylatexenc
+beautifulsoup4
+lxml

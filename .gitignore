@@ -1,0 +1,66 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Build outputs
+frontend/dist/
+frontend/build/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Data files (large)
+data/*.pdf
+data/*.tex
+data/*.bib
+
+# Generated reports
+citeguard_report.md
+corrected.bib
